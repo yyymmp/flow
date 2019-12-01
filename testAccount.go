@@ -1,4 +1,4 @@
-package main
+package flow
 
 import "fmt"
 
@@ -8,6 +8,7 @@ func main() {
 	var money float64   //金额
 	var note string     //说明
 	var detail string
+	isHaving := false
 	detail = "收支\t账户金额\t收支金额\t说明\n"
 	loop = true
 	for {
@@ -21,8 +22,12 @@ func main() {
 		fmt.Scanln(&key)
 		switch key {
 		case 1:
-			fmt.Println("----------当前收支明细表---------")
-			fmt.Println(detail)
+			if isHaving {
+				fmt.Println("----------当前收支明细表---------")
+				fmt.Println(detail)
+			} else {
+				fmt.Println("当前暂无收支情况哦")
+			}
 		case 2:
 			fmt.Println("请输入金额")
 			fmt.Scanln(&money)
@@ -30,6 +35,7 @@ func main() {
 			fmt.Scanln(&note)
 			balance += money
 			detail += fmt.Sprintf("收入\t%.2f\t%.2f\t%v\t\n", balance, money, note)
+			isHaving = true
 		case 3:
 			fmt.Println("请输入金额")
 			fmt.Scanln(&money)
@@ -41,14 +47,27 @@ func main() {
 			fmt.Scanln(&note)
 			balance -= money
 			detail += fmt.Sprintf("支出\t%.2f\t%.2f\t%v\t\n", balance, money, note)
+			isHaving = true
 		case 4:
-			loop = false
-			break
+			flag := ""
+			for {
+				fmt.Println("确定要退出吗y or n")
+				fmt.Scanln(&flag)
+				if flag == "y" {
+					loop = false
+					break
+
+				} else if flag == "n" {
+					break
+				} else {
+					fmt.Println("非法输入，请重新输入")
+				}
+			}
 		default:
 			fmt.Println("非法输入")
 		}
 		if !loop {
-			fmt.Println("一退出")
+			fmt.Println("退出")
 			break
 		}
 	}
