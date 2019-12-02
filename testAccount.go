@@ -1,4 +1,4 @@
-package flow
+package main
 
 import "fmt"
 
@@ -26,7 +26,7 @@ func main() {
 				fmt.Println("----------当前收支明细表---------")
 				fmt.Println(detail)
 			} else {
-				fmt.Println("当前暂无收支情况哦")
+				fmt.Println("当前暂无收支情况，来一笔吗")
 			}
 		case 2:
 			fmt.Println("请输入金额")
